@@ -46,7 +46,7 @@ test('Pinball floor 21 locked card follows real 20-floor completion and supports
         await page.route('**/*',async route=>{
             const url=new URL(route.request().url());let file;
             if(url.hostname==='pinball.pickbits.ai')file=resolve(root,'.'+(url.pathname==='/'?'/index.html':url.pathname));
-            else if(url.href.includes('/matter-js/0.19.0/'))file=process.env.MATTER_PATH||'C:/new/arcade/node_modules/matter-js/build/matter.min.js';
+            else if(url.href.includes('/matter-js/0.19.0/'))file=process.env.MATTER_PATH||'C:/new/pickbits-games/hubs/arcade/node_modules/matter-js/build/matter.min.js';
             else return route.fulfill({contentType:'text/javascript',body:''});
             if(url.hostname==='pinball.pickbits.ai'&&!file.startsWith(root+sep))return route.fulfill({status:403,body:''});
             const mime={'.html':'text/html','.js':'text/javascript','.glb':'model/gltf-binary','.json':'application/json','.png':'image/png','.webp':'image/webp'};

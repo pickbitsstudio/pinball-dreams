@@ -81,7 +81,7 @@ Game slug is **`pinball`**. Wiring only works when three places agree, and two o
 2. **Supabase** (`vbfwzpztnvfktydozgir`, `achievements` table) — rows must be **pre-seeded** with `game_slug='pinball'`. **`unlockAchievement` silently no-ops for slugs that don't exist there.** The `ACHIEVEMENTS` array in `src/pinball-progress.js` is a 1:1 contract with those rows: local id `foo` → slug `pinball-foo`. Adding one here without seeding it does nothing for signed-in players.
 3. **pickbits.ai** — `arcade.html` (`connected:true`) and `dashboard-redesign.js` (`saveDetail()` branch for `pinball`, which reads whatever you nest under `save_data.summary`).
 
-Playbook: `C:\new\pickbits.ai\.claude\skills\arcade-sso-wiring.skill\SKILL.md`. Vanilla-JS reference: `C:\new\shmup\js\pickbits.js`.
+Playbook: `C:\new\pickbits.ai\.claude\skills\arcade-sso-wiring.skill\SKILL.md`. Vanilla-JS reference: `C:\new\pickbits-games\games\steel-phoenix\js\pickbits.js`.
 
 ### Testing sign-in
 Auth activates **only** on a `*.pickbits.ai` origin — the edge functions enforce that CORS allowlist. Append **`?pb=1`** to force-activate locally; the SDK loads and the anonymous UI works, but the token exchange still needs the real origin. Everything must degrade silently: guard every call with `typeof PickBitsClient !== 'undefined'`, `.catch(() => {})` every promise, and always write to localStorage first so the game is whole signed-out.
